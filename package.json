@@ -1,0 +1,26 @@
+{
+  "name": "avrload",
+  "version": "0.0.0",
+  "description": "Interface for loading flash onto AVRs in JavaScript",
+  "main": "avrload.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cinderblock/avrload.git"
+  },
+  "keywords": [
+    "avr",
+    "avrdude",
+    "flash",
+    "ihex",
+    "arduino"
+  ],
+  "author": "Cameron Tacklind <cameron@tacklind.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cinderblock/avrload/issues"
+  },
+  "homepage": "https://github.com/cinderblock/avrload#readme"
+}
