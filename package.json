@@ -22,5 +22,11 @@
   "bugs": {
     "url": "https://github.com/cinderblock/avrload/issues"
   },
-  "homepage": "https://github.com/cinderblock/avrload#readme"
+  "homepage": "https://github.com/cinderblock/avrload#readme",
+  "dependencies": {
+    "crc": "^3.3.0",
+    "es6-promise": "^2.3.0",
+    "ihex": "^0.1.0",
+    "serialport": "^1.7.4"
+  }
 }
