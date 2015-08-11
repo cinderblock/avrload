@@ -40,7 +40,7 @@ DanceMessage.prototype.setID = function (ID) {
 
 DanceMessage.prototype.getMessageBuffer = function () {
  // Cut out leading header, ID, length, and trailing CRC
- return this._buff.slice(4,-2);
+ return this._buff.slice(4, -2);
 };
 
 module.exports = DanceMessage;
