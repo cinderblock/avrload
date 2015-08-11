@@ -10,8 +10,8 @@ var DanceMessage = function(len, ID) {
  // So that we can use len later
  var buffLen = len;
 
- // Header (0xffff), ID, length, and CRC
- buffLen += 2 + 2 + 2;
+ // Header + ID + length + CRC
+ buffLen += 2 + 1 + 1 + 2;
 
  this._buff = new Buffer(buffLen);
 
