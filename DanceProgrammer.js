@@ -51,16 +51,24 @@ DanceProgrammer.prototype = {
 
    var buff;
 
+   var ret = Promise.resolve();
+
    for (var pageNum = 0; pageNum < flashBytes.length / pageSizeBytes; pageNum++) {
-    buff = pageEraseMessage.getMessageBuffer;
+     ret = ret.then(new Promise(function (resolve, reject) {
 
-    // Page Number
-    buff[1] = pageNum;
+      buff = pageEraseMessage.getMessageBuffer;
 
-    pageEraseMessage.fillCRC();
+      // Page Number
+      buff[1] = pageNum;
 
-    // Send pageEraseMessage
-    // TODO: send it...
+      pageEraseMessage.fillCRC();
+
+      // Send pageEraseMessage
+      resolve(this._sendMessage(pageEraseMessage));
+
+      // TODO: Check & wait for result via CTS/RTS
+
+    }));
 
     page = flashBytes.slice(pageNum * pageSizeBytes, (pageNum + 1) * pageSizeBytes);
 
@@ -70,24 +78,33 @@ DanceProgrammer.prototype = {
     // Page is empty, only need to erase
     if (i == pageSizeBytes) continue;
 
-    buff = pageWriteMessage.getMessageBuffer;
+    ret = ret.then(new Promise(function (resolve, reject) {
+      buff = pageWriteMessage.getMessageBuffer;
 
-    buff[1] = pageNum;
+      buff[1] = pageNum;
 
-    // Copy page to message
-    page.copy(buff, 2);
+      // Copy page to message
+      page.copy(buff, 2);
 
-    pageWriteMessage.fillCRC();
+      pageWriteMessage.fillCRC();
 
-    // Send pageWriteMessage
+      resolve(this._sendMessage(pageWriteMessage));
+
+      // TODO: Check & wait for result via CTS/RTS
+    }));
+
    }
+
+   resolve(ret);
 
   });
  },
 
 
- _sendMessage: function(bytes) {
+ _sendMessage: function(messageBuffer) {
+  return new Promise(function (resolve, reject) {
 
+  });
  }
 };
 
