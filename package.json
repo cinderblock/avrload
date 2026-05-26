@@ -1,10 +1,34 @@
 {
   "name": "avrload",
-  "version": "0.0.0",
-  "description": "Interface for loading flash onto AVRs in JavaScript",
-  "main": "avrload.js",
+  "version": "1.0.0",
+  "description": "Prepare AVR flash buffers from Intel HEX files, and program them over serial using the DanceBoot bootloader protocol.",
+  "type": "module",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist/**/*.js",
+    "dist/**/*.js.map",
+    "dist/**/*.d.ts",
+    "dist/**/*.d.ts.map",
+    "!dist/**/*.test.js",
+    "!dist/**/*.test.js.map",
+    "!dist/**/*.test.d.ts",
+    "!dist/**/*.test.d.ts.map"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc",
+    "test": "npm run build && node --test dist/avrload.test.js",
+    "lint": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -12,10 +36,16 @@
   },
   "keywords": [
     "avr",
-    "avrdude",
+    "atmega",
+    "attiny",
     "flash",
     "ihex",
-    "arduino"
+    "intel-hex",
+    "bootloader",
+    "danceboot",
+    "rs485",
+    "serial",
+    "firmware"
   ],
   "author": "Cameron Tacklind <cameron@tacklind.com>",
   "license": "ISC",
@@ -24,9 +54,11 @@
   },
   "homepage": "https://github.com/cinderblock/avrload#readme",
   "dependencies": {
-    "crc": "^3.3.0",
-    "es6-promise": "^2.3.0",
-    "ihex": "^0.1.0",
-    "serialport": "^1.7.4"
+    "crc": "^4.3.2",
+    "ihex": "^1.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.19.19",
+    "typescript": "^6.0.3"
   }
 }
